@@ -3,7 +3,9 @@ import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
 import CinematicHero from "./components/CinematicHero";
 import BannerShowcase from "./components/BannerShowcase";
+import TrustMarquee from "./components/TrustMarquee";
 import HorizontalServices from "./components/HorizontalServices";
+import ImpactStats from "./components/ImpactStats";
 import StackedBenefits from "./components/StackedBenefits";
 import Footer from "./components/Footer";
 import NoiseOverlay from "./components/NoiseOverlay";
@@ -18,8 +20,10 @@ export default function Home() {
         <main className="min-h-screen bg-white">
             <Navbar />
             <CinematicHero />
+            <TrustMarquee />
             <BannerShowcase />
             <HorizontalServices />
+            <ImpactStats />
             <StackedBenefits />
             <Footer />
         </main>
