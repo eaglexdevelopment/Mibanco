@@ -59,6 +59,11 @@ export default function ResponsiveHero() {
     const currentSlide = imageRefs.current[index];
     const nextSlide = imageRefs.current[nextIndex];
 
+    if (!currentSlide || !nextSlide) {
+        setAnimating(false);
+        return;
+    }
+
     // 1. Text Refresh
     gsap.fromTo(contentRef.current,
         { y: 0, opacity: 1 },
@@ -80,8 +85,13 @@ export default function ResponsiveHero() {
     const tl = gsap.timeline({ onComplete: () => setAnimating(false) });
 
     tl.to(nextSlide, { xPercent: 0, duration: 1, ease: "power3.inOut" })
-      .to(currentSlide, { xPercent: -20, duration: 1, ease: "power3.inOut" }, "<")
-      .fromTo(nextSlide?.querySelector("img"), { scale: 1.2 }, { scale: 1, duration: 1.2 }, "<");
+      .to(currentSlide, { xPercent: -20, duration: 1, ease: "power3.inOut" }, "<");
+    
+    // Animate image scale if it exists
+    const imgElement = nextSlide.querySelector("img");
+    if (imgElement) {
+        tl.fromTo(imgElement, { scale: 1.2 }, { scale: 1, duration: 1.2 }, "<");
+    }
   };
 
   const nextSlide = () => {
