@@ -21,24 +21,22 @@ export default function ImpactStats() {
   useEffect(() => {
     const ctx = gsap.context(() => {
         numberRefs.current.forEach((el, index) => {
+            if (!el) return;
             const endValue = stats[index].value;
+            const proxy = { value: 0 };
             
-            gsap.fromTo(el, 
-                { innerText: 0 }, 
-                {
-                    innerText: endValue,
-                    duration: 2,
-                    snap: { innerText: 1 },
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "top 70%",
-                    },
-                    onUpdate: function() {
-                        if(el) el.innerText = Math.ceil(this.targets()[0].innerText).toString();
-                    }
+            gsap.to(proxy, {
+                value: endValue,
+                duration: 2.5,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 80%",
+                },
+                onUpdate: () => {
+                    el.textContent = Math.floor(proxy.value).toString();
                 }
-            );
+            });
         });
     }, sectionRef);
     return () => ctx.revert();
