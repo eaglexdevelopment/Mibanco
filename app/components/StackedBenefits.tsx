@@ -12,10 +12,10 @@ const benefits = [
     // Mibanco Green Theme
     theme: {
         bg: "bg-white",
-        accent: "text-[#00C853]", // Brand Green
-        iconBg: "bg-[#00C853]/10",
-        border: "border-[#00C853]/20",
-        shadow: "shadow-emerald-900/5"
+        accent: "text-mibanco-green", // Ensure this color exists in your tailwind config or use #00C853
+        iconBg: "bg-green-50",
+        border: "border-green-100",
+        shadow: "shadow-lg shadow-green-900/5"
     }
   },
   {
@@ -28,9 +28,9 @@ const benefits = [
     theme: {
         bg: "bg-white",
         accent: "text-amber-500",
-        iconBg: "bg-amber-500/10",
-        border: "border-amber-500/20",
-        shadow: "shadow-amber-900/5"
+        iconBg: "bg-amber-50",
+        border: "border-amber-100",
+        shadow: "shadow-lg shadow-amber-900/5"
     }
   },
   {
@@ -43,91 +43,93 @@ const benefits = [
     theme: {
         bg: "bg-white",
         accent: "text-orange-500",
-        iconBg: "bg-orange-500/10",
-        border: "border-orange-500/20",
-        shadow: "shadow-orange-900/5"
+        iconBg: "bg-orange-50",
+        border: "border-orange-100",
+        shadow: "shadow-lg shadow-orange-900/5"
     }
   }
 ];
 
 export default function ThemedStackingBenefits() {
   return (
-    <section className="relative bg-white py-24 md:py-32 overflow-hidden">
+    // FIX 1: Removed 'overflow-hidden' from here. This enables sticky behavior.
+    <section className="relative bg-[#FAFAFA] py-24 md:py-32">
       
-      {/* 1. BRAND BACKGROUND: Technical Grid (Matches your screenshots) */}
-      <div className="absolute inset-0 pointer-events-none" 
+      {/* Background Grid - Applied securely to not interfere with scroll */}
+      <div className="absolute inset-0 pointer-events-none z-0" 
            style={{ 
                backgroundImage: 'linear-gradient(#E5E7EB 1px, transparent 1px), linear-gradient(90deg, #E5E7EB 1px, transparent 1px)', 
                backgroundSize: '40px 40px',
-               opacity: 0.4
+               opacity: 0.6
            }}>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
         
-        {/* Header - Clean & Corporate */}
-        <div className="mb-20 md:mb-28 text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 mb-6">
+        {/* Header */}
+        <div className="mb-20 text-center max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-gray-200 mb-6 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#00C853]"></span>
             <span className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase">
-                Por qué Mibanco
+                Por qué elegirnos
             </span>
           </div>
           
-          <h2 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tight leading-[1.1]">
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-[1.1]">
             Beneficios diseñados <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00C853] to-emerald-700">
+            <span className="text-[#00C853]">
                 para tu éxito.
             </span>
           </h2>
         </div>
 
-        {/* STACKING CARDS */}
-        <div className="flex flex-col items-center">
+        {/* STACKING CARDS CONTAINER */}
+        <div className="flex flex-col items-center w-full">
           {benefits.map((card, index) => (
             <div 
               key={card.id}
-              // Sticky behavior creates the stack effect
-              className="sticky top-32 w-full max-w-4xl mb-6 md:mb-12 last:mb-0"
+              // FIX 2: Sticky needs a top value. 'top-32' (128px) usually clears the navbar.
+              // We add a huge bottom margin to the first cards so the scrolling has space to happen.
+              className="sticky top-32 w-full max-w-4xl mb-24 last:mb-0"
               style={{ zIndex: index + 1 }}
             >
               <div className={`
                 relative overflow-hidden
                 p-8 md:p-12 
-                rounded-[2rem] 
+                rounded-[2.5rem] 
                 ${card.theme.bg}
                 border ${card.theme.border}
-                ${card.theme.shadow} shadow-2xl
+                ${card.theme.shadow}
                 flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-12
-                transition-all duration-500 hover:-translate-y-1
+                transition-all duration-300
               `}>
                 
-                {/* Visual Accent Circle (Subtle Background) */}
-                <div className={`absolute -right-20 -top-20 w-80 h-80 rounded-full opacity-[0.08] pointer-events-none ${card.theme.iconBg.replace('/10', '')}`}></div>
+                {/* Decorative Number Background */}
+                <span className="absolute -right-4 -bottom-12 text-[10rem] font-bold text-gray-50 opacity-50 pointer-events-none select-none font-serif">
+                    {card.id}
+                </span>
 
-                {/* Left: Big Icon */}
-                <div className="flex-shrink-0">
+                {/* Left: Icon Box */}
+                <div className="flex-shrink-0 z-10">
                     <div className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl ${card.theme.iconBg} flex items-center justify-center text-4xl ${card.theme.accent}`}>
                         {card.icon}
                     </div>
                 </div>
 
                 {/* Right: Content */}
-                <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
+                <div className="flex-1 z-10">
+                    <div className="flex items-center gap-3 mb-3">
+                        <div className={`h-[2px] w-6 ${card.theme.iconBg.replace('bg-', 'bg-')}`}></div>
                         <span className={`text-xs font-bold tracking-[0.2em] uppercase ${card.theme.accent}`}>
                             {card.subtitle}
                         </span>
-                        <span className="text-4xl font-black text-gray-100 font-serif select-none">
-                            {card.id}
-                        </span>
                     </div>
                     
-                    <h3 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
                         {card.title}
                     </h3>
                     
-                    <p className="text-lg text-gray-500 leading-relaxed max-w-xl mb-8">
+                    <p className="text-lg text-gray-500 leading-relaxed max-w-xl mb-8 font-light">
                         {card.description}
                     </p>
 
