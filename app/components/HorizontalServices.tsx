@@ -95,15 +95,15 @@ export default function HorizontalServices() {
             {/* Overlay */}
             <div className={`absolute inset-0 z-10 ${service.overlay} backdrop-blur-sm transition-opacity duration-500 group-hover:backdrop-blur-none group-hover:opacity-90`}></div>
 
-            <div className="absolute top-24 left-12 z-20 opacity-20 text-white text-9xl font-black">{index + 1}.</div>
+            <div className="absolute top-24 left-12 z-20 opacity-20 text-white text-9xl font-black hidden md:block">{index + 1}.</div>
             
-            <div className="max-w-4xl w-full relative z-20 text-white mix-blend-screen bg-black/30 p-12 rounded-3xl backdrop-blur-md border border-white/10 shadow-2xl transform transition-all duration-500 hover:scale-105 hover:bg-black/50">
-                <div className="mb-12 opacity-80">{service.icon}</div>
-                <h2 className="text-6xl md:text-9xl font-black mb-4 tracking-tighter leading-none">{service.title}</h2>
-                <h3 className="text-2xl md:text-4xl font-bold uppercase tracking-widest mb-8 opacity-80 border-b-4 border-current pb-4 inline-block">{service.subtitle}</h3>
-                <p className="text-xl md:text-3xl max-w-2xl font-light">{service.desc}</p>
+            <div className="max-w-4xl w-full relative z-20 text-white mix-blend-screen bg-black/30 p-6 md:p-12 rounded-3xl backdrop-blur-md border border-white/10 shadow-2xl transform transition-all duration-500 hover:scale-105 hover:bg-black/50 mx-4 md:mx-0">
+                <div className="mb-6 md:mb-12 opacity-80 scale-75 md:scale-100 origin-left">{service.icon}</div>
+                <h2 className="text-4xl md:text-9xl font-black mb-2 md:mb-4 tracking-tighter leading-none break-words">{service.title}</h2>
+                <h3 className="text-lg md:text-4xl font-bold uppercase tracking-widest mb-4 md:mb-8 opacity-80 border-b-4 border-current pb-2 md:pb-4 inline-block">{service.subtitle}</h3>
+                <p className="text-lg md:text-3xl max-w-2xl font-light">{service.desc}</p>
                 
-                <button className="mt-12 px-8 py-4 rounded-full border-2 border-white hover:bg-white hover:text-black transition-colors font-bold uppercase tracking-wider">
+                <button className="mt-8 md:mt-12 px-6 py-3 md:px-8 md:py-4 rounded-full border-2 border-white hover:bg-white hover:text-black transition-colors font-bold uppercase tracking-wider text-sm md:text-base">
                     Descubrir Más
                 </button>
             </div>

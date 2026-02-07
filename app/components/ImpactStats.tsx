@@ -56,15 +56,15 @@ export default function ImpactStats() {
         </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center">
             {stats.map((stat, index) => (
                 <div key={index} className="flex flex-col items-center group">
-                    <div className="text-6xl md:text-8xl font-black mb-4 bg-gradient-to-br from-white to-gray-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-500">
+                    <div className="text-4xl sm:text-5xl md:text-8xl font-black mb-2 md:mb-4 bg-gradient-to-br from-white to-gray-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-500">
                         <span ref={(el) => { numberRefs.current[index] = el; }}>0</span>
                         <span>{stat.suffix}</span>
                     </div>
-                    <div className="h-1 w-12 bg-mibanco-gold mb-6 group-hover:w-24 transition-all duration-300"></div>
-                    <p className="text-xl font-bold uppercase tracking-widest text-gray-400 group-hover:text-mibanco-green transition-colors">
+                    <div className="h-1 w-8 md:w-12 bg-mibanco-gold mb-3 md:mb-6 group-hover:w-16 md:group-hover:w-24 transition-all duration-300"></div>
+                    <p className="text-xs sm:text-sm md:text-xl font-bold uppercase tracking-widest text-gray-400 group-hover:text-mibanco-green transition-colors">
                         {stat.label}
                     </p>
                 </div>
